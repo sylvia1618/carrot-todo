@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -30,6 +30,8 @@ body{background:#f6d9bf;overflow:hidden}
 .section-meta{font-size:12px;font-weight:700;color:#a06b3b}
 .btn{display:block;width:100%;padding:14px;border-radius:16px;background:#ff9a4d;color:#fffaf4;font-weight:800;font-size:16px;border:none;cursor:pointer;text-align:center;box-shadow:0 6px 10px rgba(179,93,20,.12);transition:transform .08s,opacity .08s;user-select:none}
 .btn:active{transform:scale(.98);opacity:.94}
+.btn:disabled{opacity:.4;pointer-events:none}
+.btn-secondary{background:rgba(255,248,240,.7);color:#a06b3b;border:1px solid rgba(190,132,74,.2);box-shadow:none}
 .page::-webkit-scrollbar{width:4px}
 .page::-webkit-scrollbar-track{background:transparent}
 .page::-webkit-scrollbar-thumb{background:rgba(160,107,59,.2);border-radius:2px}
@@ -40,76 +42,384 @@ body{background:#f6d9bf;overflow:hidden}
 .hero-emoji{font-size:28px}
 .hero-num{font-size:38px;font-weight:900;color:#ff8f3a;letter-spacing:-1px;line-height:1}
 .stat-band{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-radius:24px;background:rgba(255,248,240,.58);border:1px solid rgba(190,132,74,.12);margin:12px 0}
-.stat-item{flex:1}
+.stat-item{flex:1;text-align:center}
 .stat-div{width:1px;height:22px;background:rgba(190,132,74,.12)}
 .stat-lb{color:#a06b3b;font-size:12px;font-weight:700;letter-spacing:.4px}
 .stat-val{color:#2d1e10;font-size:17px;font-weight:800;margin-top:2px}
 .habit-rail{display:flex;gap:10px;padding:10px;background:rgba(255,248,240,.54);border:1px solid rgba(190,132,74,.1);border-radius:22px;margin-top:12px}
-.habit-pill{flex:1;padding:12px 0;text-align:center;border-radius:21px;background:rgba(255,255,255,.44);border:1px solid rgba(255,255,255,.45);font-weight:700;font-size:13px;color:#2d1e10;cursor:pointer;transition:transform .08s;user-select:none}
-.habit-pill:active{transform:scale(.97)}.task-text{font-size:18px;font-weight:800;color:#2d1e10;margin-bottom:10px}.status-strip{background:rgba(255,250,242,.82);border-radius:20px;padding:14px 16px;border:1px solid rgba(190,132,74,.16);margin-top:12px;color:#7d5c44;font-weight:600}
+.habit-pill{flex:1;padding:12px 0;text-align:center;border-radius:21px;background:rgba(255,255,255,.44);border:1px solid rgba(255,255,255,.45);font-weight:700;font-size:13px;color:#2d1e10;cursor:pointer;transition:all .15s;user-select:none}
+.habit-pill:active{transform:scale(.97)}
+.habit-pill.done{background:#c7e6b8;border-color:#9cc983;color:#3d6a2b;pointer-events:none}
+.task-text{font-size:18px;font-weight:800;color:#2d1e10;margin-bottom:10px}
+.status-strip{background:rgba(255,250,242,.82);border-radius:20px;padding:14px 16px;border:1px solid rgba(190,132,74,.16);margin-top:12px;color:#7d5c44;font-weight:600}
 .input-field{background:rgba(255,255,255,.5);border-radius:18px;padding:12px 14px;color:#2d1e10;border:1px solid rgba(190,132,74,.12);font-size:15px;outline:none;width:100%;font-family:inherit}
 .plan-row{display:flex;justify-content:space-between;align-items:center;padding:14px;border-radius:20px;background:rgba(255,255,255,.42);border:1px solid rgba(190,132,74,.12);margin-bottom:8px;cursor:pointer;user-select:none}
-.plan-row:active{opacity:.92}.plan-row.done{background:rgba(255,236,218,.9)}.plan-name{font-size:16px;font-weight:800;color:#2d1e10}.plan-note{margin-top:2px;color:#7d5c44;font-size:13px}.plan-state{color:#a06b3b;font-weight:800}.plan-state.done{color:#ff8f3a}
-.machine-area{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;position:relative}.machine-halo{width:240px;height:240px;border-radius:50%;background:rgba(255,247,236,.9);border:1px solid rgba(190,132,74,.14);position:absolute}.machine-card{position:relative;width:100%;max-width:320px;background:rgba(255,250,242,.92);border-radius:32px;padding:24px;border:1px solid rgba(190,132,74,.16);display:flex;flex-direction:column;align-items:center;gap:10px;box-shadow:0 10px 18px rgba(140,85,47,.08)}.machine-emoji{font-size:52px}.machine-name{font-size:20px;font-weight:800;color:#2d1e10}.machine-desc{color:#7d5c44;text-align:center;line-height:20px}.rule-pill{background:rgba(255,248,240,.8);border-radius:999px;padding:12px 16px;border:1px solid rgba(190,132,74,.14);text-align:center;color:#7d5c44;font-size:14px}.col-item{padding:14px;border-radius:20px;background:rgba(255,255,255,.44);border:1px solid rgba(190,132,74,.12);margin-top:10px}.item-name{font-weight:800;color:#2d1e10;font-size:16px}.item-rare{color:#ff8f3a;font-weight:700;font-size:13px}.item-desc{color:#7d5c44;line-height:20px;margin-top:4px}
-.modal-overlay{position:fixed;inset:0;background:rgba(45,30,16,.28);display:flex;align-items:center;justify-content:center;padding:20px;z-index:100;animation:fadeIn .2s}.modal-box{background:#fffaf4;border-radius:32px;padding:24px;border:1px solid rgba(190,132,74,.18);display:flex;flex-direction:column;align-items:center;gap:10px;max-width:340px;width:100%;animation:scaleIn .25s}.modal-glow{width:68px;height:68px;border-radius:50%;background:#fff0e2;border:1px solid #f1c99d}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes scaleIn{from{transform:scale(.85)}to{transform:scale(1)}}
-.spacer-12{height:12px}.spacer-14{height:14px}.gap-box{display:flex;flex-direction:column;gap:14px}
-.c-cta{width:150px;height:170px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;user-select:none}.c-cta:active{transform:scale(.97)}.c-leaves{position:absolute;top:-4px;width:110px;height:56px}.c-leaf{position:absolute;width:20px;height:34px;border-radius:14px}.c-body{width:126px;height:140px;border-radius:48px;background:#ff9b4d;border:1px solid #ec8b38;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:0 10px 18px rgba(140,85,47,.12);position:relative;z-index:1}.c-tip{position:absolute;bottom:-12px;width:30px;height:30px;background:#ff9b4d;border-right:1px solid #ec8b38;border-bottom:1px solid #ec8b38;transform:rotate(45deg);border-bottom-right-radius:11px}.c-emoji{font-size:34px}.c-text{color:#fffaf4;font-size:18px;font-weight:800}
-.c-card{width:272px;min-height:346px;border-radius:32px;background:rgba(255,167,92,.2);border:1px solid rgba(238,143,63,.16);padding:16px;display:flex;flex-direction:column;gap:12px;box-shadow:0 8px 16px rgba(140,85,47,.1);margin-top:20px;transition:all .3s;animation:scaleIn .3s}.c-head{display:flex;justify-content:space-between;align-items:center}.c-label{font-size:12px;font-weight:700;color:#a06b3b;letter-spacing:1px;text-transform:uppercase}.c-count{font-size:12px;color:#7d5c44;font-weight:600}.c-shell{background:#ff9b4d;border:1px solid #ec8b38;border-radius:34px;padding:12px;flex:1;display:flex;flex-direction:column}.c-edit{flex:1;background:rgba(255,246,235,.34);border-radius:20px;border:1px solid rgba(255,233,212,.22);padding:14px;min-height:150px}.c-edit textarea{width:100%;min-height:120px;border:none;background:transparent;color:#2d1e10;font-size:16px;line-height:24px;resize:none;outline:none;font-family:inherit}
-.archive-box{background:rgba(255,250,243,.6);border-radius:28px;border:1px solid rgba(158,107,59,.14);padding:14px;margin-top:10px}.arch-item{background:rgba(255,167,92,.18);border-radius:22px;padding:14px;border:1px solid rgba(238,143,63,.18);margin-bottom:10px}.arch-date{color:#a06b3b;font-size:12px;font-weight:700;letter-spacing:.6px}.arch-text{color:#5d4635;line-height:20px;margin-top:6px}
+.plan-row:active{opacity:.92}
+.plan-row.done{background:rgba(255,236,218,.9)}
+.plan-name{font-size:16px;font-weight:800;color:#2d1e10}
+.plan-note{margin-top:2px;color:#7d5c44;font-size:13px}
+.plan-state{color:#a06b3b;font-weight:800}
+.plan-state.done{color:#ff8f3a}
+.col-item{padding:14px;border-radius:20px;background:rgba(255,255,255,.44);border:1px solid rgba(190,132,74,.12);margin-top:10px}
+.item-name{font-weight:800;color:#2d1e10;font-size:16px}
+.item-rare{color:#ff8f3a;font-weight:700;font-size:13px}
+.item-desc{color:#7d5c44;line-height:20px;margin-top:4px}
+.col-item.unlocked{background:rgba(255,236,218,.9);border-color:rgba(255,143,58,.2)}
+.modal-overlay{position:fixed;inset:0;background:rgba(45,30,16,.28);display:flex;align-items:center;justify-content:center;padding:20px;z-index:100;animation:fadeIn .2s}
+.modal-box{background:#fffaf4;border-radius:32px;padding:24px;border:1px solid rgba(190,132,74,.18);display:flex;flex-direction:column;align-items:center;gap:10px;max-width:340px;width:100%;animation:scaleIn .25s}
+.modal-glow{width:68px;height:68px;border-radius:50%;background:#fff0e2;border:1px solid #f1c99d;display:flex;align-items:center;justify-content:center;font-size:32px}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scaleIn{from{transform:scale(.85)}to{transform:scale(1)}}
+.spacer-12{height:12px}
+.spacer-14{height:14px}
+.gap-box{display:flex;flex-direction:column;gap:14px}
+.c-card{width:272px;min-height:346px;border-radius:32px;background:rgba(255,167,92,.2);border:1px solid rgba(238,143,63,.16);padding:16px;display:flex;flex-direction:column;gap:12px;box-shadow:0 8px 16px rgba(140,85,47,.1);margin-top:20px;transition:all .3s;animation:scaleIn .3s}
+.c-card .c-head{display:flex;justify-content:space-between;align-items:center}
+.c-card .c-label{font-size:12px;font-weight:700;color:#a06b3b;letter-spacing:1px}
+.c-card .c-count{font-size:12px;color:#7d5c44;font-weight:600}
+.c-card .c-shell{background:#ff9b4d;border:1px solid #ec8b38;border-radius:34px;padding:12px;flex:1;display:flex;flex-direction:column}
+.c-card .c-edit{flex:1;background:rgba(255,246,235,.34);border-radius:20px;border:1px solid rgba(255,233,212,.22);padding:14px;min-height:150px}
+.c-card .c-edit textarea{width:100%;min-height:120px;border:none;background:transparent;color:#2d1e10;font-size:16px;line-height:24px;resize:none;outline:none;font-family:inherit}
+.archive-box{background:rgba(255,250,243,.6);border-radius:28px;border:1px solid rgba(158,107,59,.14);padding:14px;margin-top:10px}
+.arch-item{background:rgba(255,167,92,.18);border-radius:22px;padding:14px;border:1px solid rgba(238,143,63,.18);margin-bottom:10px}
+.arch-date{color:#a06b3b;font-size:12px;font-weight:700;letter-spacing:.6px}
+.arch-text{color:#5d4635;line-height:20px;margin-top:6px}
+.empty-state{text-align:center;padding:30px 16px;color:#7d5c44;font-weight:600;font-size:15px;line-height:24px}
+.timer-bar{background:rgba(255,248,240,.58);border:1px solid rgba(190,132,74,.12);border-radius:24px;padding:18px 16px;margin-top:12px;text-align:center}
+.timer-display{font-size:48px;font-weight:900;color:#2d1e10;letter-spacing:2px;font-variant-numeric:tabular-nums}
+.timer-btn-row{display:flex;gap:12px;margin-top:12px}
+.timer-btn-row .btn{flex:1}
+.plan-tabs{display:flex;gap:8px;margin-bottom:10px}
+.plan-tab{flex:1;padding:8px;border-radius:14px;background:rgba(255,255,255,.4);border:1px solid rgba(190,132,74,.12);text-align:center;color:#7d5c44;font-weight:700;font-size:13px;cursor:pointer;transition:all .15s}
+.plan-tab.active{background:#fde6cf;border-color:#ff9a4d;color:#2d1e10}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#2d1e10;color:#fffaf4;padding:12px 24px;border-radius:999px;font-weight:700;font-size:15px;z-index:200;animation:fadeIn .2s;box-shadow:0 6px 14px rgba(0,0,0,.15);pointer-events:none}
 </style>
 </head>
 <body>
 <div id="app"><div class="page-container" id="pg"></div><div class="tab-bar" id="tab"></div></div>
 <script>
-const S={activeTab:0,points:320,timer:false,streak:7,box:null,planDraft:'',diary:'今天比昨天多坚持了 20 分钟，已经很棒了。',newPost:'',saved:0,cardOpen:false};
-let items=[{id:'1',name:'背诵废萝卜',rarity:'普通款',desc:'头顶《肖四》，眼神清澈但灵魂迷茫。',unlocked:true},{id:'2',name:'咖啡续命萝卜',rarity:'普通款',desc:'凌晨两点仍在续命，手里永远拿着冰美式。',unlocked:true},{id:'3',name:'正义大法官萝卜',rarity:'稀有款',desc:'穿法袍、拿法槌，讲话自带判词音效。',unlocked:false},{id:'4',name:'上岸萝卜',rarity:'隐藏款',desc:'抱着录取通知书，金光闪闪。',unlocked:false}];
-const pool=[{id:'b1',name:'背诵废萝卜',rarity:'普通款',desc:'今天又把法条背成了口号。'},{id:'b2',name:'咖啡续命萝卜',rarity:'普通款',desc:'咖啡因含量高于自信心。'},{id:'b3',name:'正义大法官萝卜',rarity:'稀有款',desc:'一锤定音，卷王退散。'},{id:'b4',name:'上岸萝卜',rarity:'隐藏款',desc:'把录取通知书攥在手里。'}];
-let posts=[{id:'p1',author:'今晚吃不下肖四的考研胡萝卜',text:'今天主观题写到手抽筋，感觉自己快变成萝卜干了。',likes:12,waters:8,createdAt:'2026-06-03 21:18'},{id:'p2',author:'跨考法考的焦虑橙子',text:'背诵进度有点慢，但我还在撑。',likes:8,waters:14,createdAt:'2026-06-03 09:42'}];
-let plans=[{id:'p1',title:'背 50 个单词',note:'早上完成',date:'2026-06-04',done:true},{id:'p2',title:'整理法条笔记',note:'今晚完成',date:'2026-06-04',done:false}];
-const todayStr=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+// ========== 安全工具 ==========
+function esc(s){return String(s).replace(/&/g,'\x26').replace(/</g,'\x3C').replace(/>/g,'\x3E').replace(/"/g,'\x22').replace(/'/g,"\x27")}
+function toast(m){var t=document.createElement('div');t.className='toast';t.textContent=m;document.body.appendChild(t);setTimeout(function(){t.remove()},2000)}
 
-function render(){renderTab();renderPages();}
-const tabs=[{k:'🥕',l:'萝卜基地'},{k:'📝',l:'萝卜计划'},{k:'🎁',l:'收藏中心'},{k:'💬',l:'随记'}];
-function renderTab(){document.getElementById('tab').innerHTML=tabs.map((t,i)=>'<div class="tab-item" onclick="switchTab('+i+')"><div class="tab-icon-wrap'+(S.activeTab===i?' active':'')+'"><span class="tab-icon">'+t.k+'</span></div><span class="tab-label'+(S.activeTab===i?' active':'')+'">'+t.l+'</span></div>').join('');}
-function switchTab(i){S.activeTab=i;renderTab();renderPages();}
-
-function renderPages(){
-const h=[renderHome,renderPlan,renderCollect,renderCommunity];
-document.getElementById('pg').innerHTML=h.map((f,i)=>f(i)).join('');
+// ========== 持久化 ==========
+var STORAGE_KEY='luobo_todo_v2';
+function saveState(){
+  var d={S:S,plans:plans,items:items,posts:posts};
+  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(d))}catch(e){}
+}
+function loadState(){
+  try{
+    var r=localStorage.getItem(STORAGE_KEY);
+    if(r){
+      var d=JSON.parse(r);
+      if(d.S)Object.assign(S,d.S);
+      if(d.plans)plans=d.plans;
+      if(d.items)items=d.items;
+      if(d.posts)posts=d.posts;
+    }
+  }catch(e){}
 }
 
-function renderHome(i){
-const p=Math.min(100,Math.round((S.points/500)*100)),n=24,c=Math.round(p/100*n);
-let dots='';
-for(let j=0;j<n;j++){const a=(j/n)*Math.PI*2,x=120+Math.cos(a-Math.PI/2)*95-9,y=120+Math.sin(a-Math.PI/2)*95-9,ac=j<c;dots+='<div class="ring-dot" style="left:'+x+'px;top:'+y+'px;background:'+(ac?'#ff8f3a':'#ead8c9')+';opacity:'+(ac?1:.45)+'"></div>';}
-const focus=plans.find(p=>!p.done)?.title??'今日计划已完成';
-return '<div class="page'+(S.activeTab===i?' active':'')+'"><p class="kicker">Overview</p><p class="title">萝卜计划</p><p class="subtitle">今日进度与任务概览。</p><div class="hero-area"><div class="hero-rings">'+dots+'<div class="hero-core"><span class="hero-emoji">🥕</span><span class="hero-num" id="hp">'+p+'%</span></div></div></div><div class="stat-band"><div class="stat-item"><p class="stat-lb">连续打卡</p><p class="stat-val">'+S.streak+' 天</p></div><div class="stat-div"></div><div class="stat-item"><p class="stat-lb">状态</p><p class="stat-val">'+(S.timer?'专注中':'待开始')+'</p></div></div><div class="section"><div class="section-head"><span class="section-title">习惯</span><span class="section-meta">今日轻量打卡</span></div><div class="habit-rail"><div class="habit-pill" onclick="earn(20)">早起</div><div class="habit-pill" onclick="earn(20)">三餐</div><div class="habit-pill" onclick="earn(20)">睡觉</div></div></div><div style="margin-top:12px"><p class="task-text">'+focus+'</p><button class="btn" onclick="focusTask()">'+(S.timer?'专注中…':'开始专注')+'</button></div><div class="status-strip">今日状态：已完成 1 / 3</div></div>';
-}
-function earn(a){S.points+=a;const e=document.getElementById('hp');if(e)e.textContent=Math.min(100,Math.round((S.points/500)*100))+'%';}
-function focusTask(){if(S.timer)return;S.timer=true;setTimeout(()=>{S.timer=false;S.points+=100;S.streak++;plans=plans.map(p=>p.id==='p2'?{...p,done:true,note:p.note+' · 已完成'}:p);alert('成功啃掉今日任务\n胡萝卜素 +100！');render();},1400);renderPages();}
+// ========== 默认数据 ==========
+var S={activeTab:0,points:320,streak:0,habitDone:{},timer:{active:false,remaining:0,paused:false,started:null},boxResult:null,planDraft:'',planTab:'today',diary:'',cardOpen:false,saved:0,drawCount:0,lastDate:''};
+var plans=[{id:'p1',title:'背 50 个单词',note:'早上完成',date:'',done:false},{id:'p2',title:'整理法条笔记',note:'今晚完成',date:'',done:false}];
+var items=[
+  {id:'1',name:'背诵废萝卜',rarity:'普通款',desc:'头顶肖四，眼神清澈但灵魂迷茫。',unlocked:true,emoji:'📚'},
+  {id:'2',name:'咖啡续命萝卜',rarity:'普通款',desc:'凌晨两点仍在续命，手里永远拿着冰美式。',unlocked:true,emoji:'☕'},
+  {id:'3',name:'正义大法官萝卜',rarity:'稀有款',desc:'穿法袍、拿法槌，讲话自带判词音效。',unlocked:false,emoji:'⚖️'},
+  {id:'4',name:'上岸萝卜',rarity:'隐藏款',desc:'抱着录取通知书，金光闪闪。',unlocked:false,emoji:'🎓'},
+  {id:'5',name:'熬夜战神萝卜',rarity:'稀有款',desc:'连续通宵三天，眼圈比法条还黑。',unlocked:false,emoji:'😈'},
+  {id:'6',name:'泡面侠萝卜',rarity:'普通款',desc:'期末月靠泡面维生，连包装袋都舍不得扔。',unlocked:false,emoji:'🍜'},
+  {id:'7',name:'自律机器萝卜',rarity:'稀有款',desc:'每天 5 点起床，雷打不动。',unlocked:false,emoji:'🤖'},
+  {id:'8',name:'金萝卜',rarity:'隐藏款',desc:'集齐全部 8 只萝卜的终极奖励。',unlocked:false,emoji:'🌟'}
+];
+var posts=[];
+var pool=[
+  {id:'b1',name:'背诵废萝卜',rarity:'普通款',desc:'今天又把法条背成了口号。',emoji:'📚',weight:30},
+  {id:'b2',name:'咖啡续命萝卜',rarity:'普通款',desc:'咖啡因含量高于自信心。',emoji:'☕',weight:30},
+  {id:'b3',name:'泡面侠萝卜',rarity:'普通款',desc:'连泡面包装袋上的配料表都能背下来。',emoji:'🍜',weight:25},
+  {id:'b4',name:'熬夜战神萝卜',rarity:'稀有款',desc:'连续通宵三天，眼圈比法条还黑。',emoji:'😈',weight:12},
+  {id:'b5',name:'正义大法官萝卜',rarity:'稀有款',desc:'一锤定音，卷王退散。',emoji:'⚖️',weight:10},
+  {id:'b6',name:'自律机器萝卜',rarity:'稀有款',desc:'时间表精确到秒，饭都不配吃热乎的。',emoji:'🤖',weight:8},
+  {id:'b7',name:'上岸萝卜',rarity:'隐藏款',desc:'把录取通知书攥在手里。',emoji:'🎓',weight:3},
+  {id:'b8',name:'金萝卜',rarity:'隐藏款',desc:'集齐全部 8 只萝卜的终极奖励。',emoji:'🌟',weight:2}
+];
+var BLINDBOX_COST=200;
+var HABIT_REWARDS={早起:10,三餐:8,睡觉:6};
 
-function renderPlan(i){
-const today=plans[0]?.date??todayStr(),tp=plans.filter(p=>p.date===today),dc=plans.filter(p=>p.done).length;
-return '<div class="page'+(S.activeTab===i?' active':'')+'"><p class="kicker">Plan</p><p class="title">萝卜计划</p><p class="subtitle">今日计划、完成状态、每日记录与归档。</p><div class="spacer-14"></div><div class="section"><div class="section-head"><span class="section-title">今日计划</span><span class="section-meta">新增并安排今天要做的事</span></div><input class="input-field" id="d" placeholder="背 20 个单词" value="'+S.planDraft+'" oninput="S.planDraft=this.value"><div class="spacer-12"></div><button class="btn" onclick="addPlan()">添加</button></div><div class="spacer-14"></div><div class="section"><div class="section-head"><span class="section-title">完成状态</span><span class="section-meta">'+dc+' / '+plans.length+' 已完成</span></div>'+(tp.length?tp.map(p=>'<div class="plan-row'+(p.done?' done':'')+'" onclick="togPlan(\''+p.id+'\')"><div><p class="plan-name">'+p.title+'</p><p class="plan-note">'+p.note+'</p></div><span class="plan-state'+(p.done?' done':'')+'">'+(p.done?'已完成':'未完成')+'</span></div>').join(''):'')+'</div><div class="spacer-14"></div><div class="section"><div class="section-head"><span class="section-title">每日记录</span><span class="section-meta">按天查看执行情况</span></div>'+plans.map(p=>'<div class="plan-row" style="cursor:default"><div><p style="color:#a06b3b;font-weight:700;font-size:12px">'+p.date+'</p><p class="plan-name" style="margin-top:4px">'+p.title+'</p><p class="plan-note">'+p.note+'</p></div><span class="plan-state'+(p.done?' done':'')+'">'+(p.done?'已完成':'进行中')+'</span></div>').join('')+'</div></div>';
+// ========== 实用函数 ==========
+function todayStr(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function weightedPick(arr){
+  var total=0,i;
+  for(i=0;i<arr.length;i++)total+=arr[i].weight;
+  var r=Math.random()*total;
+  for(i=0;i<arr.length;i++){r-=arr[i].weight;if(r<=0)return arr[i]}
+  return arr[arr.length-1];
 }
-function addPlan(){if(!S.planDraft.trim())return;plans.unshift({id:String(Date.now()),title:S.planDraft.trim(),note:'今日新增',date:todayStr(),done:false});S.planDraft='';renderPages();}
-function togPlan(id){plans=plans.map(p=>p.id===id?{...p,done:!p.done,note:p.done?p.note:p.note+' · 已完成'}:p);renderPages();}
 
-function renderCollect(i){
-const uc=items.filter(x=>x.unlocked).length;
-return '<div class="page'+(S.activeTab===i?' active':'')+'"><p class="kicker">Collection</p><p class="title">收藏中心</p><p class="subtitle">在这里抽取奖励，也查看收集成果。</p><div class="spacer-14"></div><div class="section" style="display:flex;flex-direction:column;align-items:center;gap:10px"><span class="section-title">盲盒抽取</span><span class="section-meta">当前胡萝卜素 '+S.points+'</span><button class="btn" onclick="openBox()" style="max-width:200px">单抽一次</button></div><div class="spacer-14"></div><div class="section"><div class="section-head"><span class="section-title">收集成果</span><span class="section-meta">已收集 '+uc+' / '+items.length+'</span></div>'+items.map(x=>'<div class="col-item"><p class="item-name">'+(x.unlocked?x.name:'未解锁')+'</p><p class="item-rare">'+(x.unlocked?x.rarity:'隐藏剪影')+'</p><p class="item-desc">'+(x.unlocked?x.desc:'继续努力，解锁这只萝卜。')+'</p></div>').join('')+'</div><div class="spacer-14"></div><button class="btn" onclick="alert(\'分享海报\\nMVP 里先保留一键海报的入口。\')">生成收纳箱海报</button>'+(S.box?'<div class="modal-overlay" onclick="if(event.target===this)closeBox()"><div class="modal-box"><div class="modal-glow"></div><p style="font-size:16px;color:#a06b3b;font-weight:600">恭喜抽中</p><p style="font-size:28px;font-weight:800;color:#2d1e10">'+S.box.name+'</p><p style="font-size:14px;color:#ff8f3a;font-weight:700">'+S.box.rarity+'</p><p style="color:#7d5c44;text-align:center;line-height:20px">'+S.box.desc+'</p><button class="btn" onclick="closeBox()">收下它</button></div></div>':'')+'</div>';
+// ========== 每日重置 ==========
+function dailyCheck(){
+  var td=todayStr();
+  if(S.lastDate!==td){
+    if(S.lastDate){
+      var last=new Date(S.lastDate);
+      var now=new Date(td);
+      var diff=Math.round((now-last)/(86400000));
+      if(diff===1)S.streak++;
+      else if(diff>1)S.streak=0;
+    }else{S.streak=0}
+    S.lastDate=td;
+    todayPlans();
+    saveState();
+  }
 }
-function openBox(){if(S.points<500){alert('胡萝卜素不足\n再努力一点，就能抽盲盒了。');return}S.points-=500;const r=pool[Math.floor(Math.random()*pool.length)];S.box=r;items=items.map(x=>x.name===r.name?{...x,unlocked:true}:x);renderPages();}
-function closeBox(){S.box=null;renderPages();}
-
-function renderCommunity(i){
-return '<div class="page'+(S.activeTab===i?' active':'')+'"><p class="kicker">Notes</p><p class="title">随记</p><p class="subtitle">点开一张萝卜卡，写完后折好收进纸箱。</p><div class="spacer-14"></div><div class="community-stage"><div class="c-cta" onclick="toggleCard()"><div class="c-leaves">'+(S.cardOpen?'<div class="c-leaf" style="background:#4a8c3a;transform:rotate(-34deg);left:28px;top:2px;height:30px"></div><div class="c-leaf" style="background:#7ec957;height:38px;top:-4px"></div><div class="c-leaf" style="background:#4a8c3a;transform:rotate(34deg);right:28px;top:2px;height:30px"></div>':'')+'</div><div class="c-body"><div class="c-tip"></div><span class="c-emoji">🥕</span><span class="c-text">记录</span></div></div>'+(S.cardOpen?'<div class="c-card"><div class="c-head"><span class="c-label">Roibo Note</span><span class="c-count">已收纳 '+S.saved+'</span></div><div class="c-shell"><div class="c-edit"><textarea placeholder="写下今天的感受" oninput="S.diary=this.value">'+S.diary+'</textarea></div></div><button class="btn" onclick="saveNote()">折好，放进纸箱</button></div>':'')+'</div><div class="spacer-14"></div><p style="font-size:18px;font-weight:800;color:#2d1e10">纸箱存档</p><p style="font-size:14px;color:#7d5c44;margin-top:4px">只保留自己的随记，按日期和时间归档。</p><div class="archive-box">'+posts.map(p=>'<div class="arch-item"><p class="arch-date">'+p.createdAt+'</p><p class="arch-text">'+p.text+'</p></div>').join('')+'</div></div>';
+function todayPlans(){
+  var td=todayStr();
+  if(!plans.some(function(p){return p.date===td})){
+    var greetings=['背 50 个单词','整理今日笔记','做一道真题','复习错题集','写一段论文'];
+    plans.unshift({id:'d_'+Date.now(),title:greetings[Math.floor(Math.random()*greetings.length)],note:'今日份打卡',date:td,done:false});
+  }
 }
-function toggleCard(){S.cardOpen=!S.cardOpen;renderPages();}
-function saveNote(){S.saved++;S.cardOpen=false;posts.unshift({id:String(Date.now()),author:'我的随记',text:S.diary.trim()||'记录了一条心情',likes:0,waters:0,createdAt:todayStr()+' '+String(new Date().getHours()).padStart(2,'0')+':'+String(new Date().getMinutes()).padStart(2,'0')});renderPages();}
 
+// ========== 渲染引擎 ==========
+function render(){
+  dailyCheck();
+  renderTab();
+  document.getElementById('pg').innerHTML=[
+    renderHome(),renderPlan(),renderCollect(),renderCommunity()
+  ].join('');
+}
+function renderTab(){
+  var tabs=[{k:'🥕',l:'基地'},{k:'📝',l:'计划'},{k:'🎁',l:'收藏'},{k:'💬',l:'随记'}];
+  var h='';
+  for(var i=0;i<tabs.length;i++){
+    h+='<div class="tab-item" onclick="switchTab('+i+')"><div class="tab-icon-wrap'+(S.activeTab===i?' active':'')+'"><span class="tab-icon">'+tabs[i].k+'</span></div><span class="tab-label'+(S.activeTab===i?' active':'')+'">'+tabs[i].l+'</span></div>';
+  }
+  document.getElementById('tab').innerHTML=h;
+}
+function switchTab(i){S.activeTab=i;render();saveState()}
+
+// ========== 页面 1：萝卜基地 ==========
+function renderHome(){
+  var td=todayStr();
+  var pct=Math.min(100,Math.round((S.points/2000)*100));
+  var n=24,ac=Math.round(pct/100*n);
+  var dots='';
+  for(var j=0;j<n;j++){
+    var a=(j/n)*Math.PI*2;
+    var x=120+Math.cos(a-Math.PI/2)*95-9;
+    var y=120+Math.sin(a-Math.PI/2)*95-9;
+    dots+='<div class="ring-dot" style="left:'+x.toFixed(1)+'px;top:'+y.toFixed(1)+'px;background:'+(j<ac?'#ff8f3a':'#ead8c9')+';opacity:'+(j<ac?'1':'.45')+'"></div>';
+  }
+  var habitKeys=['早起','三餐','睡觉'];
+  var habitHtml='';
+  for(var k=0;k<habitKeys.length;k++){
+    var key=habitKeys[k];
+    var done=S.habitDone[key]===td;
+    habitHtml+='<div class="habit-pill'+(done?' done':'')+'" onclick="doHabit(\''+key+'\')">'+key+(done?' ✓':' +'+HABIT_REWARDS[key])+'</div>';
+  }
+  var tmr=S.timer;
+  var timerHtml='';
+  if(tmr.active){
+    var min=Math.floor(tmr.remaining/60);
+    var sec=tmr.remaining%60;
+    var display=String(min).padStart(2,'0')+':'+String(sec).padStart(2,'0');
+    timerHtml='<div class="timer-bar"><p class="timer-display">'+display+'</p><p class="stat-lb" style="margin-top:6px">专注倒计时</p><div class="timer-btn-row"><button class="btn" onclick="stopTimer()">停止</button><button class="btn btn-secondary" onclick="togglePause()">'+(tmr.paused?'继续':'暂停')+'</button></div>';
+    if(tmr.paused)timerHtml+='<p style="color:#a06b3b;font-weight:700;font-size:13px;margin-top:8px">\u23F8 已暂停</p>';
+    timerHtml+='</div>';
+  }
+  var focusItem=null;
+  for(var i=0;i<plans.length;i++){if(!plans[i].done&&plans[i].date===td){focusItem=plans[i];break}}
+  var focusText=focusItem?esc(focusItem.title):'今日计划已完成!';
+  var todayPlansArr=[];
+  for(var i=0;i<plans.length;i++){if(plans[i].date===td)todayPlansArr.push(plans[i])}
+  var todayDone=0;
+  for(var i=0;i<todayPlansArr.length;i++){if(todayPlansArr[i].done)todayDone++}
+  var todayTotal=todayPlansArr.length||1;
+  return '<div class="page'+(S.activeTab===0?' active':'')+'"><p class="kicker">Overview</p><p class="title">萝卜基地</p><p class="subtitle">总胡萝卜素 <strong>'+S.points+'</strong> &middot; 连击 '+S.streak+' 天</p><div class="hero-area"><div class="hero-rings">'+dots+'<div class="hero-core"><span class="hero-emoji">\uD83E\uDD55</span><span class="hero-num">'+pct+'%</span></div></div></div><div class="section"><div class="section-head"><span class="section-title">习惯打卡</span><span class="section-meta">每天一次</span></div><div class="habit-rail">'+habitHtml+'</div></div>'+(tmr.active?timerHtml:'<div class="section" style="margin-top:12px"><div class="section-head"><span class="section-title">专注</span><span class="section-meta">25 分钟番茄钟</span></div><p class="task-text">'+focusText+'</p><button class="btn" onclick="startTimer()">\uD83C\uDF45 开始专注</button></div>')+'<div class="status-strip">今日计划：'+todayDone+' / '+todayTotal+' 完成</div></div>';
+}
+function doHabit(k){
+  var td=todayStr();
+  if(S.habitDone[k]===td){toast('今日已打卡 '+k);return}
+  S.habitDone[k]=td;
+  S.points+=HABIT_REWARDS[k]||10;
+  var keys=0;
+  for(var key in S.habitDone){if(S.habitDone[key]===td)keys++}
+  if(keys===1)S.streak=S.streak||1;
+  toast('\uD83E\uDD55 +'+HABIT_REWARDS[k]);
+  saveState();render();
+}
+function startTimer(){
+  S.timer={active:true,remaining:25*60,paused:false,started:Date.now()};
+  saveState();render();
+  tickTimer();
+}
+function tickTimer(){
+  if(!S.timer.active)return;
+  if(!S.timer.paused)S.timer.remaining--;
+  if(S.timer.remaining<=0){
+    S.points+=50;
+    S.streak=(S.streak||0)+1;
+    S.timer={active:false,remaining:0,paused:false,started:null};
+    toast('专注完成！萝卜素 +50');
+    saveState();render();
+    return;
+  }
+  render();
+  setTimeout(tickTimer,1000);
+}
+function stopTimer(){
+  S.timer={active:false,remaining:0,paused:false,started:null};
+  toast('专注已停止');
+  saveState();render();
+}
+function togglePause(){
+  S.timer.paused=!S.timer.paused;
+  saveState();render();
+  if(!S.timer.paused)tickTimer();
+}
+
+// ========== 页面 2：萝卜计划 ==========
+function renderPlan(){
+  var td=todayStr();
+  var todayList=[],futureList=[],doneList=[];
+  for(var i=0;i<plans.length;i++){
+    var p=plans[i];
+    if(p.done)doneList.push(p);
+    else if(p.date===td||!p.date)todayList.push(p);
+    else futureList.push(p);
+  }
+  var tabHtml='<div class="plan-tabs">';
+  var tabKeys=['today','future','done'];
+  var tabLabels={today:'今天',future:'未来',done:'归档'};
+  for(var i=0;i<tabKeys.length;i++){
+    tabHtml+='<div class="plan-tab'+(S.planTab===tabKeys[i]?' active':'')+'" onclick="switchPlanTab(\''+tabKeys[i]+'\')">'+tabLabels[tabKeys[i]]+'</div>';
+  }
+  tabHtml+='</div>';
+  var listHtml='';
+  var showList=[];
+  if(S.planTab==='today')showList=todayList;
+  else if(S.planTab==='future')showList=futureList;
+  else showList=doneList;
+  if(showList.length===0){
+    listHtml='<div class="empty-state">\uD83D\uDCCB 还没计划，写一个吧</div>';
+  }else{
+    listHtml='';
+    for(var i=0;i<showList.length;i++){
+      var p=showList[i];
+      listHtml+='<div class="plan-row'+(p.done?' done':'')+'" onclick="togPlan(\''+p.id+'\')"><div><p class="plan-name">'+esc(p.title)+'</p>';
+      if(p.note)listHtml+='<p class="plan-note">'+esc(p.note)+(p.date?' &middot; '+esc(p.date):'')+'</p>';
+      if(p.done)listHtml+='<p class="plan-note">已完成</p>';
+      else listHtml+='<p class="plan-note">进行中</p>';
+      listHtml+='</div><span class="plan-state'+(p.done?' done':'')+'">'+(p.done?'\u2713':'\u25CB')+'</span></div>';
+    }
+    if(S.planTab==='done')listHtml+='<button class="btn btn-secondary" onclick="clearDone()" style="margin-top:10px">清空归档</button>';
+  }
+  return '<div class="page'+(S.activeTab===1?' active':'')+'"><p class="kicker">Plan</p><p class="title">萝卜计划</p><p class="subtitle">今天 '+(plans.filter(function(p){return p.date===td}).length)+' 项 &middot; 已完成 '+plans.filter(function(p){return p.done}).length+' 项</p><div class="spacer-14"></div><div class="section"><div class="section-head"><span class="section-title">新建计划</span></div><input class="input-field" placeholder="背 20 个单词" value="'+esc(S.planDraft)+'" oninput="S.planDraft=this.value"><div class="spacer-12"></div><button class="btn" onclick="addPlan()">添加</button></div><div class="spacer-14"></div><div class="section"><div class="section-head"><span class="section-title">计划列表</span></div>'+tabHtml+listHtml+'</div></div>';
+}
+function switchPlanTab(t){S.planTab=t;saveState();render()}
+function addPlan(){
+  if(!S.planDraft.trim())return;
+  plans.unshift({id:'p_'+Date.now(),title:S.planDraft.trim(),note:'',date:todayStr(),done:false});
+  S.planDraft='';
+  saveState();render();
+}
+function togPlan(id){
+  for(var i=0;i<plans.length;i++){if(plans[i].id===id){plans[i].done=!plans[i].done;break}}
+  saveState();render();
+}
+function clearDone(){
+  plans=plans.filter(function(p){return !p.done});
+  saveState();render();
+}
+
+// ========== 页面 3：收藏中心 ==========
+function renderCollect(){
+  var uc=0;for(var i=0;i<items.length;i++){if(items[i].unlocked)uc++}
+  var tc=items.length;
+  var btnDisabled=S.points<BLINDBOX_COST;
+  var boxBtn='<button class="btn" onclick="openBox()" style="max-width:200px;margin:0 auto"';
+  if(btnDisabled)boxBtn+=' disabled';
+  boxBtn+='>\uD83C\uDF81 单抽 ('+BLINDBOX_COST+'\uD83E\uDD55)'+(btnDisabled?' 余额不足':'')+'</button>';
+  var modal='';
+  if(S.boxResult){
+    var r=S.boxResult;
+    modal='<div class="modal-overlay" onclick="if(event.target===this)closeBox()"><div class="modal-box"><div class="modal-glow">'+(r.emoji||'\uD83C\uDF81')+'</div><p style="font-size:16px;color:#a06b3b;font-weight:600">恭喜抽中</p><p style="font-size:28px;font-weight:800;color:#2d1e10">'+esc(r.name)+'</p><p style="font-size:14px;color:#ff8f3a;font-weight:700">'+esc(r.rarity)+'</p><p style="color:#7d5c44;text-align:center;line-height:20px">'+esc(r.desc)+'</p><button class="btn" onclick="closeBox()">收下它</button></div></div>';
+  }
+  var itemsHtml='';
+  for(var i=0;i<items.length;i++){
+    var x=items[i];
+    itemsHtml+='<div class="col-item'+(x.unlocked?' unlocked':'')+'"><p class="item-name">'+(x.unlocked?x.emoji+' '+esc(x.name):'\u2753 未解锁')+'</p><p class="item-rare">'+(x.unlocked?esc(x.rarity):'隐藏剪影')+'</p><p class="item-desc">'+(x.unlocked?esc(x.desc):'继续努力，解锁这只萝卜。')+'</p></div>';
+  }
+  return '<div class="page'+(S.activeTab===2?' active':'')+'"><p class="kicker">Collection</p><p class="title">收藏中心</p><p class="subtitle">已收集 '+uc+'/'+tc+ ' &middot; 已抽 '+S.drawCount+' 次</p><div class="spacer-14"></div><div class="section" style="display:flex;flex-direction:column;align-items:center;gap:10px"><span class="section-title">盲盒抽取</span><span class="section-meta">普通款 73% / 稀有款 20% / 隐藏款 7%</span><div class="stat-row" style="margin-top:8px"><span class="stat-chip">余额 <span class="stat-val-inline">'+S.points+'</span> \uD83E\uDD55</span><span class="stat-chip">已抽 <span class="stat-val-inline">'+S.drawCount+'</span> 次</span><span class="stat-chip">保底 <span class="stat-val-inline">'+(20-S.drawCount%20)+'</span> 抽</span></div>'+boxBtn+'</div><div class="spacer-14"></div><div class="section"><div class="section-head"><span class="section-title">收集成果</span><span class="section-meta">'+uc+' / '+tc+'</span></div>'+itemsHtml+'</div>'+modal+'</div>';
+}
+
+function openBox(){
+  if(S.points < BLINDBOX_COST)return;
+  S.points -= BLINDBOX_COST;
+  S.drawCount++;
+  var picked = weightedPick(pool);
+  // 如果已经解锁了该款，给安慰奖
+  var already = false;
+  for(var i=0;i<items.length;i++){
+    if(items[i].name===picked.name && items[i].unlocked){already=true;break}
+  }
+  if(already){
+    S.points += 30;
+    S.boxResult = {name:picked.name + ' (复刻)',rarity:picked.rarity,desc:'已经拥有这款萝卜，获得安慰胡萝卜素 +30。',emoji:picked.emoji};
+  }else{
+    S.boxResult = picked;
+    for(var i=0;i<items.length;i++){
+      if(items[i].name===picked.name){items[i].unlocked=true;break}
+    }
+    // 检查集齐
+    var all = true;
+    for(var i=0;i<items.length;i++){if(!items[i].unlocked){all=false;break}}
+    if(all)toast('🌟 恭喜集齐全部 8 只萝卜！金萝卜已解锁');
+  }
+  saveState();render();
+}
+function closeBox(){S.boxResult=null;saveState();render()}
+
+// ========== 页面 4：随记 ==========
+function renderCommunity(){
+  var noteBtn = '<div style="display:flex;flex-direction:column;align-items:center;cursor:pointer" onclick="toggleCard()">';
+  noteBtn += '<div style="width:150px;height:170px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative">';
+  noteBtn += '<div style="width:126px;height:140px;border-radius:48px;background:#ff9b4d;border:1px solid #ec8b38;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:0 10px 18px rgba(140,85,47,.12);position:relative;z-index:1">';
+  noteBtn += '<div style="position:absolute;bottom:-12px;width:30px;height:30px;background:#ff9b4d;border-right:1px solid #ec8b38;border-bottom:1px solid #ec8b38;transform:rotate(45deg);border-bottom-right-radius:11px"></div>';
+  noteBtn += '<span style="font-size:34px">🥕</span><span style="color:#fffaf4;font-size:18px;font-weight:800">记录</span></div></div></div>';
+  var cardHtml = '';
+  if(S.cardOpen){
+    cardHtml = '<div class="c-card"><div class="c-head"><span class="c-label">Roibo Note</span><span class="c-count">已收纳 ' + S.saved + '</span></div><div class="c-shell"><div class="c-edit"><textarea placeholder="写下今天的感受" oninput="S.diary=this.value">' + esc(S.diary) + '</textarea></div></div><button class="btn" onclick="saveNote()">折好，放进纸箱</button></div>';
+  }
+  var archiveHtml = '';
+  for(var i=0;i<posts.length;i++){
+    var p=posts[i];
+    archiveHtml += '<div class="arch-item"><p class="arch-date">' + esc(p.createdAt) + '</p><p class="arch-text">' + esc(p.text) + '</p></div>';
+  }
+  if(archiveHtml==='')archiveHtml = '<div class="empty-state">📦 纸箱还是空的，写点什么吧</div>';
+  return '<div class="page'+(S.activeTab===3?' active':'')+'"><p class="kicker">Notes</p><p class="title">随记</p><p class="subtitle">点开一张萝卜卡，写完后折好收进纸箱。</p><div class="spacer-14"></div>' + noteBtn + cardHtml + '<div class="spacer-14"></div><p style="font-size:18px;font-weight:800;color:#2d1e10">纸箱存档</p><p style="font-size:14px;color:#7d5c44;margin-top:4px">只保留自己的随记，按日期和时间归档。</p><div class="archive-box">' + archiveHtml + '</div></div>';
+}
+function toggleCard(){S.cardOpen=!S.cardOpen;render()}
+function saveNote(){
+  S.saved++;
+  S.cardOpen=false;
+  var now=new Date();
+  var ts=todayStr()+' '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+  posts.unshift({id:'ps_'+Date.now(),text:S.diary.trim()||'记录了一条心情',createdAt:ts});
+  S.diary='';
+  saveState();render();
+}
+
+// ========== 启动 ==========
+loadState();
+if(plans.length<2 && posts.length===0){
+  // 首次使用添加默认数据
+  plans=[{id:'p1',title:'背 50 个单词',note:'早上完成',date:'',done:false},{id:'p2',title:'整理法条笔记',note:'今晚完成',date:'',done:false}];
+}
 render();
+
 </script>
 </body>
 </html>
